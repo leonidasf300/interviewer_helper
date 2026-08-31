@@ -1,65 +1,65 @@
 # Interviewer Helper
 
-Asistente de respuestas en vivo para pruebas de `ai-voice-interview-platform`.
+Real-time response assistant for testing `ai-voice-interview-platform`.
 
-## Qué es
+## What is it
 
-Una herramienta que escucha en tiempo real las preguntas de un entrevistador (IA o humano) durante pruebas manuales, genera una respuesta sugerida con LLM, y la muestra en pantalla para que el tester humano la lea en voz alta — ahorrándole al tester tener que improvisar respuestas técnicas complejas mientras valida el pipeline real de voz de la plataforma.
+A tool that listens in real-time to questions from an interviewer (AI or human) during manual testing, generates a suggested answer with an LLM, and displays it on screen for the tester to read aloud — saving the tester from having to improvise technical responses while validating the platform's real voice pipeline.
 
-## Por qué
+## Why
 
-`ai-voice-interview-platform` es una plataforma de entrevistas técnicas por voz. Hoy, probar el flujo completo requiere que un humano haga de candidato manualmente, lo cual es lento y depende de que el tester improvise buenas respuestas. Este proyecto acelera esas pruebas manuales.
+`ai-voice-interview-platform` is a voice-based technical interview platform. Today, testing the complete flow requires a human to manually act as a candidate, which is slow and depends on the tester being able to improvise good answers. This project accelerates those manual tests.
 
-## Cómo funciona (arquitectura)
+## How it works (architecture)
 
-Pipeline de baja latencia:
+Low-latency pipeline:
 
-1. **Captura de audio**: loopback del audio de salida del sistema (lo que suena por parlantes/headset)
-2. **VAD**: detecta cuándo el entrevistador terminó de hablar → dispara cierre de transcripción
-3. **STT (streaming)**: transcribe la pregunta en tiempo real (bajo latencia)
-4. **LLM (streaming)**: genera respuesta sugerida (técnica, contexto AI/Data Eng)
-5. **UI de consola**: muestra pregunta + respuesta en streaming
-6. **Métricas**: latencia entre fin-de-pregunta y aparición de respuesta sugerida
+1. **Audio capture**: loopback from system audio output (what plays through speakers/headset)
+2. **VAD**: detects when the interviewer finishes speaking → triggers transcription close
+3. **STT (streaming)**: transcribes the question in real-time (low latency)
+4. **LLM (streaming)**: generates suggested answer (technical, AI/Data Eng context)
+5. **Console UI**: displays question + answer streaming
+6. **Metrics**: latency between end-of-question and suggested response appearance
 
-Stack: Python, proveedores STT/LLM cloud con opción local (pluggable).
+Stack: Python, cloud STT/LLM providers with local option (pluggable).
 
 ## Roadmap (Milestones)
 
-- **M1**: Captura de audio loopback (PoC) — Windows
-- **M2**: STT en tiempo real — transcripción en consola
-- **M3**: VAD / segmentación de preguntas
-- **M4**: LLM + respuesta sugerida
-- **M5**: Medición y tuning de latencia
-- **M6**: Pulido de UI de consola
-- **Futuro**: soporte español/bilingüe, captura de mic del humano, automatización 100%, portabilidad cloud
+- **M1**: Audio loopback capture (PoC) — Windows
+- **M2**: Real-time STT — transcription to console
+- **M3**: VAD / question segmentation
+- **M4**: LLM + suggested response
+- **M5**: Latency measurement and tuning
+- **M6**: Console UI polish
+- **Future**: Spanish/bilingual support, human mic capture for auto-detection, 100% automation via API, cloud portability
 
-## Entornos de prueba
+## Testing environments
 
-1. **Contra la plataforma**: sesión real contra `ai-voice-interview-platform` en local (Clara, 8 preguntas fijas)
-2. **Llamada con colega**: sesión Zoom/Meet con ingeniero haciendo de entrevistador (más variedad, entorno controlado)
+1. **Against platform**: real session against `ai-voice-interview-platform` running locally (Clara, 8 fixed questions)
+2. **Call with colleague**: Zoom/Meet session with engineer acting as interviewer (more variety, controlled environment)
 
-## Prerequisitos
+## Prerequisites
 
 - Python 3.10+
-- `ai-voice-interview-platform` corriendo en local (`docker-compose up`)
-- API keys para proveedor STT y LLM elegido
-- Dispositivo de audio con salida accesible por loopback (headset/parlantes)
+- `ai-voice-interview-platform` running locally (`docker-compose up`)
+- API keys for chosen STT and LLM provider
+- Audio device with accessible loopback output (headset/speakers)
 
-## Desarrollo
+## Development
 
 ```bash
-# Clonar / entrar al proyecto
+# Clone / enter the project
 cd "C:\Users\ASUS\CodingProjects\interviewer helper"
 
-# (A implementar) Crear env virtual y instalar deps
+# (To be implemented) Create virtual env and install deps
 python -m venv venv
 source venv/Scripts/activate  # Windows
 pip install -r requirements.txt
 
-# (A implementar) Correr
+# (To be implemented) Run
 python main.py
 ```
 
-## Estado
+## Status
 
-🟡 **En planeación** — lista de tareas inicial a definir. Milestone 1 (captura de audio) en construcción.
+🟡 **In planning** — initial task list to be defined. Milestone 1 (audio capture) in progress.
